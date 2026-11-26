@@ -3,12 +3,18 @@
 # SPDX-License-Identifier: MPL-2.0
 
 version = 1
-SPDX-PackageName = "pgm-template-repo"
+SPDX-PackageName = "power-grid-model-java"
 SPDX-PackageSupplier = "Power Grid Model project <powergridmodel@lfenergy.org>"
-SPDX-PackageDownloadLocation = "https://github.com/PowerGridModel/pgm-template-repo"
+SPDX-PackageDownloadLocation = "https://github.com/PowerGridModel/power-grid-model-java"
 
 [[annotations]]
-path = "./**"
+path = "**"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Contributors to the Power Grid Model project <powergridmodel@lfenergy.org>"
 SPDX-License-Identifier = "MPL-2.0"
+
+[[annotations]]
+path = ["gradlew", "gradlew.bat", "gradle/wrapper/gradle-wrapper.jar"]
+precedence = "override"
+SPDX-FileCopyrightText = "Gradle contributors"
+SPDX-License-Identifier = "Apache-2.0"

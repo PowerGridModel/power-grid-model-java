@@ -1,0 +1,86 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'jacoco'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+    withSourcesJar()
+    withJavadocJar()
+}
+
+jar {
+    archiveBaseName.set('power-grid-model-java')
+}
+
+test.finalizedBy(jacocoTestReport)
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = false
+        csv.required = false
+    }
+}
+
+dependencies {
+    api libs.jspecify
+    implementation libs.pgm.ffm
+    testImplementation testLibs.junit.jupiter
+    testRuntimeOnly testLibs.junit.platform
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    jvmArgs '--enable-native-access=ALL-UNNAMED'
+}
+
+tasks.named('javadoc') {
+    options.addBooleanOption('Xdoclint:all,-missing', true)
+}
+
+publishing {
+    repositories {
+        maven {
+            name = 'staging'
+            url = rootProject.layout.buildDirectory.dir('staging-deploy')
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'org.lfenergy.powergridmodel'
+            artifactId = 'power-grid-model-java'
+            pom {
+                name = 'power-grid-model-java'
+                description = 'High-level Java API for Power Grid Model'
+                url = 'https://github.com/PowerGridModel/power-grid-model-java'
+                organization {
+                    name = 'LF Energy'
+                    url = 'https://lfenergy.org'
+                }
+                licenses {
+                    license {
+                        name = 'Mozilla Public License, Version 2.0'
+                        url = 'https://www.mozilla.org/en-US/MPL/2.0/'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'contributors'
+                        name = 'Power Grid Model Contributors'
+                        email = 'powergridmodel@lfenergy.org'
+                        url = 'https://github.com/PowerGridModel/power-grid-model-java'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/PowerGridModel/power-grid-model-java.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/PowerGridModel/power-grid-model-java.git'
+                    url = 'https://github.com/PowerGridModel/power-grid-model-java'
+                }
+            }
+        }
+    }
+}

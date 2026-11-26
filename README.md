@@ -6,38 +6,26 @@ SPDX-License-Identifier: MPL-2.0
 
 [![Power Grid Model logo](https://raw.githubusercontent.com/PowerGridModel/.github/main/artwork/svg/color.svg)](#)
 
-# Power Grid Model template repository
+# Power Grid Model Java
 
-This is a template repository for the Power Grid Model project.
-Only common and mandatory content is included in this repository.
-The derived repositories should review and edit content relevant to the best practices and standards. 
+This library provides a high-level Java API for [Power Grid Model](https://github.com/PowerGridModel/power-grid-model)
+using its [Java FFM bindings](https://github.com/PowerGridModel/libpower-grid-model-java).
 
-## Checklist after creating a repository from this template
+## Build and test
 
-Update the following items manually before publishing your repository:
+With JDK 25, use the Gradle wrapper to build the library and run the tests:
 
-- [ ] Rename the repository and update all references in this file.
-- [ ] Replace all `pgm-template-repo` references across the repository, especially in this README and REUSE.toml.
-- [ ] Replace the project title and description in this README.
-- [ ] Ensure all third-party licenses are present in [LICENSES](https://github.com/PowerGridModel/pgm-template-repo/tree/main/LICENSES).
-- [ ] Change the default created repo settings to align with PGM standards. Verify against existing repos. For eg. enable dependabot
-scanning, private vulnerability reporting and dependency graph creation.
+```sh
+java -jar gradle/wrapper/gradle-wrapper.jar build
+```
 
-### Optional checks
-
-Change these if applicable.
-
-- [ ] Replace Power Grid Model project-specific links (for example contributing, support, release, security, and code of conduct links) 
-with links for your project.
-- [ ] Add logos and badges corresponding to relevant pages
-- [ ] Verify [LICENSE](https://github.com/PowerGridModel/pgm-template-repo/blob/main/LICENSE) copyright holder and year(s).
-Also verify SPDX copyright headers in source and documentation files.
-- [ ] Include documents present in [Home page of PGM org](https://github.com/PowerGridModel/.github/) in documentation if they are created.
+Dependencies are resolved from Maven Central, and no private repository credentials are required.
+For local consumption, use the wrapper with `:pgm:publishToMavenLocal`. No remote publishing is configured.
 
 ## License
 
 This project is licensed under the Mozilla Public License, version 2.0 - see
-[LICENSE](https://github.com/PowerGridModel/pgm-template-repo/blob/main/LICENSE) for details.
+[LICENSE](LICENSE) for details.
 
 ## Licenses third-party libraries
 
@@ -45,7 +33,7 @@ This project includes third-party libraries,
 which are licensed under their own respective Open-Source licenses.
 SPDX-License-Identifier headers are used to show which license is applicable.
 The concerning license files can be found in the
-[LICENSES](https://github.com/PowerGridModel/pgm-template-repo/tree/main/LICENSES) directory.
+[LICENSES](LICENSES) directory.
 
 ## Contributing
 
