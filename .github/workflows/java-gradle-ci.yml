@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: Contributors to the Power Grid Model project <powergridmodel@lfenergy.org>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+name: Java CI with Gradle for library
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    environment: ci
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup runtime
+        uses: ./.github/actions/setup-runtime
+
+      - name: Build & Run Tests
+        run: ./gradlew build --configuration-cache
+
+  reuse-compliance:
+    name: REUSE Compliance
+    uses: ./.github/workflows/reuse-compliance.yml

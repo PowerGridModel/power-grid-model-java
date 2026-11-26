@@ -1,0 +1,22 @@
+rootProject.name = 'power-grid-model-java'
+
+include 'pgm'
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+
+    versionCatalogs {
+        libs {
+            library('pgm-ffm', 'org.lfenergy.powergridmodel', 'power-grid-model-ffm').version('1.13.169')
+
+            library('jspecify', 'org.jspecify', 'jspecify').version('1.0.0')
+        }
+
+        create("testLibs") {
+            library('junit-jupiter', 'org.junit.jupiter', 'junit-jupiter').version('5.11.4')
+            library('junit-platform', 'org.junit.platform', 'junit-platform-launcher').version('1.11.4')
+        }
+    }
+}
